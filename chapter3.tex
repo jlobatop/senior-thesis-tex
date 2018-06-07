@@ -109,7 +109,7 @@ The test functions used were:
         \label{eq:poloni}
     \end{equation}
 
-\item \textbf{Zitzler-Deb-Thiele's test function:} ZDT's are classical test functions designed for genetic algorithms to test its performance. They are designed for 30 variables and biobjective optimization, but in this case, it was adapted to just two variables \cite{zitzler2000comparison}:
+\item \textbf{Zitzler-Deb-Thiele's test functions:} ZDT are a classical set of test functions designed for genetic algorithms to test its performance. They are designed for 30 variables and biobjective optimization, but in this case, the ZDT2 function was adapted to just two variables \cite{zitzler2000comparison}:
     \begin{equation}
 \begin{array}{cl}
             \textrm{minimize} & 
@@ -198,7 +198,7 @@ As said before, it must be noted that the first generation of the NSGA-II has tw
 
 The values shown in the figures are the mean and standard deviation of the two metrics, having that Figure \ref{fig:diverMetric} has error bars with the mean $\mu_\Delta$ and standard deviation $\sigma_\Delta$ of the analyzed cases, while the error bars in Figure \ref{fig:convMetric} represent $\mu_\Upsilon$ and $\sigma_\Upsilon$. The values are very high when compared with the ones obtained in \cite{deb2002fast} for the same test functions, but as said before the number of function evaluations is very low when compared to those in the paper.  
 
-The results in the Figure \ref{fig:diverMetric} for the divergence metric ($\Delta$) show not conclusive results. There is not a clear trend seen in all three functions. The vertical axis has the same limit in all subfigures in order to compare more easily the results. Although it may seem that for a small number of generations the metric has a higher value (having that the best approach will be to have a greater number of generations), the changes are slight and they do not serve to draw any conclusion. It is interesting to see that the Bihn \& Korn function yield the same results without any dependence on the combination (reducing only the standard deviation with more evaluations).
+The results in Figure \ref{fig:diverMetric} for the divergence metric ($\Delta$) show not conclusive results. There is not a clear trend seen in all three functions. The vertical axis has the same limit in all subfigures in order to compare more easily the results. Although it may seem that for a small number of generations the metric has a higher value (having that the best approach will be to have a greater number of generations), the changes are slight and they do not serve to draw any conclusion. It is interesting to see that the Bihn \& Korn function yield the same results without any dependence on the combination (reducing only the standard deviation with more evaluations).
 
     \newpage
     
@@ -242,7 +242,7 @@ The convergence metric ($\Upsilon$) results are shown in Figure \ref{fig:convMet
 
 In this subsection, different CFD setups will be presented and explained (showing the results in the following section). The code of the NSGA-II was implemented in Python for a two variable and two function case (although it may be easily upgraded to a higher number of variables and objective functions). The different individuals were generated from Python scripts that transformed the variables into a mesh or a configuration file for a case. Each individual has been simulated with OpenFOAM in a parallel fashion (using MPI for multiprocessor parallel computing). The results obtained from the simulation were analyzed with ParaView (in the \texttt{pvbatch} mode) or directly with Python to get the fitness value of each individual. With that fitness value, the genetic algorithm computed the next generation, sending it to OpenFOAM as before. All this loop was controlled with Bash scripting: from running the simulations and waiting for them to finish before sending the next set to calling the different scripts for every individual and generation. Only 2D cases were analyzed, although the procedure for 3D cases will be the same.
 
-The workstation used to perform the different cases is a 32 processor machine (Intel Xeon CPU E5-2650 @ 2.00GHz) with 64 Gb of RAM memory and a 275 Gb SSD hard disk. The machine was running under Ubuntu 16.04 LTS, with OpenFOAM version 5.00, ParaView v5.4.0 and Python 3.6.4. The amount of data obtained after the simulation process almost fill the whole solid state drive, so listing the whole code is unfeasible. However, the basic files for performing the different cases are available in GitHub (\url{https://github.com/jlobatop/senior-thesis}) as well as the code and Jupyter notebooks developed along the process of this thesis. 
+The workstation used to perform the different cases was a machine with 32 processors (Intel Xeon CPU E5-2650 @ 2.00GHz), 64 Gb of RAM memory and a 275 Gb SSD hard disk. The machine was running under Ubuntu 16.04 LTS, with OpenFOAM version 5.00, ParaView v5.4.0 and Python 3.6.4. The amount of data obtained after the simulation process almost fill the whole solid state drive, so listing the whole code is unfeasible. However, the basic files for performing the different cases are available in GitHub (\url{https://github.com/jlobatop/GA-CFD-MO}) as well as the code and Jupyter notebooks developed along the process of this thesis. 
 
 \subsection{Suppression of cylinder vortex oscillations}
 
@@ -263,8 +263,7 @@ As said, the flow control will be performed with a sinusoidal wave type of funct
 \begin{equation}
     x_{rms}^2=\overline{x}^2+\sigma_x^2=\overline{x^2}
 \end{equation} 
-
-where $\bar{x}$ is the mean and $\sigma_x$ is the standard deviation. The problem that this metric has is that it cannot go to zero because the mean $\overline{x}$ will not go to zero given that there is only one exit in the rear part and the force exerted is not compensated with a front membrane (having that $\overline{x}\neq 0$. Minimizing $x_{rms}$ will try to minimize the oscillations but also it will try to make the force zero. 
+where $\bar{x}$ is the mean and $\sigma_x$ is the standard deviation. The problem that this metric has is that it cannot go to zero because the mean $\overline{x}$ will not go to zero given that there is only one exit in the rear part and the force exerted is not compensated with a front membrane (having that $\overline{x}\neq 0$). Minimizing $x_{rms}$ will try to minimize the oscillations but also it will try to make the force zero. 
 
 The metric that better represent the problem is the standard deviation $\sigma$. Computing it in the last $n$ cycles (where $n$ depends on the complete cycles that have been captured in the simulation), an oscillatory force will only have $\sigma=0$ if the amplitude of the oscillations is zero. Thus, the algorithm will try to minimize $\sigma_Y$ and $\sigma_X$ for a sum of the pressure and viscous forces.
 
@@ -356,7 +355,7 @@ Apart from the typical mesh convergence studies, the processor convergence type 
 The results of the processor convergence in Figure \ref{fig:procConvergenceCyl} shown that using $8$ processor gives the fastest results. However, when applying genetic algorithms or another population-based algorithm, there are a lot of similar simulations that might be performed at the same time. If each individual is computed in 1 processor (and constraining the problem to a 32-processors machine), then 32 individuals may be computed at the same time. If each individual is simulated in 2 processors, only 16 individuals may be run at the same time (so if each population is formed by 32 individuals, 16 must be simulated first and 16 once the latter have finished). If each individual is run in 4 processors, only 8 individuals may be simulated at the same time, sending the population in 4 groups of 8. 
 
 
-If the sum of times from one individual is multiplied by the divisions that must be made to a generation of $32$ individuals for simulating the whole population, an estimation of the simulation time is obtained. Nevertheless, the real times were computed and plotted in \ref{fig:genProcConvergenceCyl}, seeing that there is a difference between the actual values and the estimated ones (probably due to the fact that there are computational resources that were not affected in the one individual simulation times).  
+If the sum of times from one individual is multiplied by the divisions that must be made to a generation of $32$ individuals for simulating the whole population, an estimation of the simulation time is obtained. Nevertheless, the real times were computed and plotted in Figure \ref{fig:genProcConvergenceCyl}, seeing that there is a difference between the actual values and the estimated ones (probably due to the fact that there are computational resources that were not affected in the one individual simulation times).  
 
      \begin{figure}[h!]
         \centering
@@ -371,7 +370,7 @@ The reconstructed time has been separated from the decomposition time because in
 
 \subsection{Inlet of diffuser geometry}
 
-Optimizing the inlet of a diffuser is the first step for increasing the efficiency and performance of the engine as a whole. Inlet diffuser geometry is a well-known problem that has been studied in multiple approaches \cite{djebedjian2004two} \cite{schmandt2011diffuser}. However, there are a lot of shapes in which the inlet may be optimized, e.g. if multiple variables are analyzed, the shape may be parametrized with splines or with control nodes. For simplification purposes, in this study the shape was computed with two values: a length ($L$) and an angle $\theta$, which are the search space variables. The function space is formed by the total pressure ratio (computed between the total pressure in the outlet of the diffuser and the freestream total pressure) and by the Mach number in the diffuser outlet. Both values will be maximized. The first one seems evident to maximize: total pressure ratio is related to entropy generation and the lower the entropy generation, the better. The maximization of the Mach number in the outlet of the diffuser may be useful in supersonic combustion engines, where there is not turbomachinery and the flow may enter at supersonic speeds to the diffuser. 
+Optimizing the inlet of a diffuser is the first step for increasing the efficiency and performance of the engine as a whole. Inlet diffuser geometry is a well-known problem that has been studied in multiple approaches \cite{djebedjian2004two}, \cite{schmandt2011diffuser}. However, there are a lot of shapes in which the inlet may be optimized, e.g., if multiple variables are analyzed, the shape may be parametrized with splines or with control nodes. For simplification purposes, in this study the shape was computed with two values: a length ($L$) and an angle ($\theta$), which are the search space variables. The function space is formed by the total pressure ratio (computed between the total pressure in the outlet of the diffuser and the freestream total pressure) and by the Mach number in the diffuser outlet. Both values will be maximized. The first one seems evident to maximize: total pressure ratio is related to entropy generation and the lower the entropy generation, the better. The maximization of the Mach number in the outlet of the diffuser may be useful in supersonic combustion engines, where there is not turbomachinery and the flow may enter at supersonic speeds to the diffuser. 
 
 \subsubsection*{Case setup}
 
@@ -379,7 +378,7 @@ In this case, instead of varying the flow conditions as before, the optimization
 
 \newpage
 
-The geometry of the mesh is sketched in the figure \ref{fig:diffuserMesh}, having some fixed distances for all possible individuals and some variable dimensions: $L$ and $\theta$. Fixed distances will constrain the possible dimensions that the step may have and they are necessary to avoid having a completely undefined problem. Python took each combination of $L$ and $\theta$, created a \texttt{blockMeshDict} with the corresponding dimensions and then run the file to get the mesh. 
+The geometry of the mesh is sketched in Figure \ref{fig:diffuserMesh}, having some fixed distances for all possible individuals and some variable dimensions: $L$ and $\theta$. Fixed distances will constrain the possible dimensions that the step may have and they are necessary to avoid having a completely undefined problem. Python took each combination of $L$ and $\theta$, created a \texttt{blockMeshDict} with the corresponding dimensions and then run the file to get the mesh. 
 
      \begin{figure}[h!]
         \centering
@@ -388,7 +387,7 @@ The geometry of the mesh is sketched in the figure \ref{fig:diffuserMesh}, havin
         \label{fig:diffuserMesh}
     \end{figure}
 
-One possible set of values $L-\theta$ returned the mesh shown in the Figure \ref{fig:diffuserMeshPF}. It can be seen that the grading of the mesh is concentred in some zones while other zones have a more coarse grid. Given that \texttt{blockMesh} uses hexahedral blocks, the refinement must be performed along the dimensions of the hexahedral. This is a 2D case so in the spanwise direction $z$ there is only one cell (not shown in the picture).
+One possible set of values $L-\theta$ returned the mesh shown in Figure \ref{fig:diffuserMeshPF}. It can be seen that the grading of the mesh is concentred in some zones while other zones have a more coarse grid. Given that \texttt{blockMesh} uses hexahedral blocks, the refinement must be performed along the dimensions of the hexahedral. This is a 2D case so in the spanwise direction $z$ there is only one cell (not shown in the picture).
 
      \begin{figure}[h!]
         \centering
@@ -421,7 +420,7 @@ The search space is located in the grey zone (Figure \ref{fig:searchSpace}):
 
 The same procedure to determine the best combination of processors as the one followed in the cylinder was done for this case. Here, the optimum number of processors was 16, using a decomposition in 16 subdomains for each one of the cases. Mesh convergence was also performed, taking as most optimum values the ones obtained from a high-resolution mesh simulated with the same conditions as the case here presented. One consideration when selecting the mesh size is the time for performing each simulation, given that the simulation of one generation of 32 individuals took 2 hours, without including the fitness evaluation. 
 
-The mesh is composed by 8 blocks with the sizes described in the Figure \ref{fig:diffuserMesh}. The boundary conditions are shown in Figure \ref{fig:diffuserBC} and the type and value for each one of the variables is collected in Table \ref{table:BCdiffuser}. 
+The mesh is composed by 8 blocks with the sizes described in Figure \ref{fig:diffuserMesh}. The boundary conditions are shown in Figure \ref{fig:diffuserBC} and the type and value for each one of the variables is collected in Table \ref{table:BCdiffuser}. 
 
     \vspace{10mm}    
     
@@ -507,7 +506,7 @@ The mesh is composed by 8 blocks with the sizes described in the Figure \ref{fig
 \subsection{Airfoil design}
 
 
-The most typical use of optimization algorithms in CFD techniques is the design or airfoils. However, the classical approach is done via adjoint shape methods, achieving the most optimum airfoil by varying the mesh shape. Other approaches try to adjust the different splines that form the airfoil applying then panel methods theory. In this study, the application of genetic algorithms and computer fluid dynamics to achieve the most optimal airfoil will be addressed. 
+The most typical use of optimization algorithms in CFD techniques is the design of airfoils. However, the classical approach is done via adjoint shape methods, achieving the most optimum airfoil by varying the mesh shape. Other approaches try to adjust the different splines that form the airfoil applying then panel methods theory. In this study, the application of genetic algorithms and computer fluid dynamics to achieve the most optimal airfoil will be addressed. 
 
 As said there are a lot of way of parametrizing one airfoil. There are also families of airfoils described by some number, such as the NACA family. But for a first approach, it will be interesting to begin with a more straightforward parametrization. Joukowsky airfoils are one of those sets that is usually used for potential flow but they may be compared with some NACA airfoils, having that the transformation is more than a mathematical construction \cite{kapania2008modeling}.
 
@@ -524,7 +523,9 @@ where $z = x + y\ i$ and $\zeta = \chi + \eta\ i$.
         \label{fig:nonJoukowsky}
     \end{figure}
 
-Taking a closer look to Joukowsky airfoils, they only have realistic shapes if the circle in $\zeta$ intercepts the point $\zeta = (-1,0)$ or the point $\zeta = (1,0)$ (as it can be seen in the Figure \ref{fig:nonJoukowsky}). This way the radius will be determined with the position of the center of the circle, having $R=f(\mu_x,\mu_y)$. Thus the search variables that form the parameter space are $\mu_x$ and $\mu_y$, which are the coordinates of the center of the circle in the $\zeta$ plane in the $\chi$ and $\eta$.
+\newpage
+
+Taking a closer look to Joukowsky airfoils, they only have realistic shapes if the circle in $\zeta$ intercepts the point $\zeta = (-1,0)$ or the point $\zeta = (1,0)$ (as it can be seen in Figure \ref{fig:nonJoukowsky}). This way the radius will be determined with the position of the center of the circle, having $R=f(\mu_x,\mu_y)$. Thus the search variables that form the parameter space are $\mu_x$ and $\mu_y$, which are the coordinates of the center of the circle in the $\zeta$ plane in the $\chi$ and $\eta$.
 
      \begin{figure}[h!]
         \centering

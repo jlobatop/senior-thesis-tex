@@ -13,4 +13,6 @@ TeX document of the GA-CFD-MO project
 
 The document is based on the PhD Thesis template of the University of Oxford (source: https://www.sharelatex.com/templates/thesis/phd-thesis-of-university-of-oxford). To compile the files with TexMaker just use ``PdfLaTeX + Bib(la)tex + PdfLaTeX (x2)``.
 
-The code used for this thesis is available here under MIT license: https://github.com/jlobatop/GA-CFD-MO. 
+The code used for this thesis is available under MIT license at: https://github.com/jlobatop/GA-CFD-MO. 
+
+The way this repository will be organized is by keeping the version handed in at the University of Vermont in the master branch, creating a slightly modified version for the University of Leon in other branch. 

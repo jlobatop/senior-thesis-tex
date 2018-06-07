@@ -1,6 +1,6 @@
 \chapter{Literature review}
     
-    Before moving into the different cases and simulations carried out, an extensive analysis of the current state-of-art must be done: begging from the basics and going through the latest papers. The study will be structured in the three main parts of the thesis: optimization of multi-objective problems, genetic algorithms and computer fluid dynamics.
+    Before moving into the different cases and simulations carried out, an extensive analysis of the current state-of-art must be done: beginning from the basics and going through the latest papers. The study will be structured in the three main parts of the thesis: optimization of multi-objective problems, genetic algorithms and computer fluid dynamics.
 
 \section{Optimization}
 
@@ -27,7 +27,7 @@
         \label{fig:twoSpaces}
     \end{figure}    
     
-    A visual example of this kind of problems can be seen in figure \ref{fig:BihnKorn}, where the test function proposed by Binh and Korn (Test Case 2 from \cite{binh1997mobes}) is plotted. The function was stated as:
+    A visual example of this kind of problems can be seen in Figure \ref{fig:BihnKorn}, where the test function proposed by Binh and Korn (Test Case 2 from \cite{binh1997mobes}) is plotted. The function was stated as:
     \begin{equation}
         \begin{array}{cl}
             \textrm{minimize} & 
@@ -69,7 +69,7 @@
     \end{equation}
     
     
-    This may seem like a good approach. Its main advantage is the simplicity, but the success of the method largely depends on the chosen weights, which value is determined with the relative importance of each objective to the additive objective. It has also problems when dealing with non-convex objective spaces, given that some solutions can't be represented with the average sum \cite{jakob2014pareto} \cite{fonseca1995overview}.
+    This may seem like a good approach. Its main advantage is the simplicity, but the success of the method largely depends on the chosen weights, which value is determined with the relative importance of each objective to the additive objective. It has also problems when dealing with non-convex objective spaces, given that some solutions can't be represented with the average sum \cite{jakob2014pareto}, \cite{fonseca1995overview}.
 
 \subsection{Pareto front}
 
@@ -88,7 +88,7 @@
         \label{eq:ParetoDominance}
     \end{equation}
     
-    The concept of Pareto dominance is shown with a graphical explanation (restricted for 2 objective problems for clarity) in the next figure:
+    The concept of Pareto dominance is shown with a graphical explanation (restricted for 2 objective problems for simplicity) in the next figure:
     
     \begin{figure}[h!]
         \centering
@@ -106,9 +106,9 @@
     
     \newpage
     
-    If there is one decision vector $\bm{x}^*$ for which there is not any other $\bm{x}$ in \textit{Area C} (i.e. there is not any solution that dominates $\bm{x}^*$) it is said that it is Pareto optimal or non-dominated. The set of Pareto optimal solutions $\bm{x}^*$ is usually called Pareto front or Pareto frontier, which consists of all non-dominated decision vectors (Figure \ref{fig:4cuad}). In can also be seen which is the 'true' optimum value, although given that it is outside the function space $Z$ it is not a valid solution.
+    If there is one decision vector $\bm{x}^*$ for which there is not any other $\bm{x}$ in \textit{Area C} (i.e. there is not any solution that dominates $\bm{x}^*$) it is said that it is Pareto optimal or non-dominated. The set of Pareto optimal solutions $\bm{x}^*$ is usually called Pareto front or Pareto frontier, which consists of all non-dominated decision vectors (Figure \ref{fig:4cuad}). It can also be seen which is the 'true' optimum value, although given that it is outside the function space $Z$ it is not a valid solution.
     
-    The representation of the Pareto front in optimization problems with just two objectives is quite straightforward, as seen in Figure \ref{fig:4cuad}. The Pareto front can be also represented in three dimensions with surfaces, but in high-order multi-objective optimization cases, the representation becomes harder. For those problems, there are other alternatives to the classical representation, e.g. slices of the Pareto front \cite{jaini2017fuzzy} \cite{triantaphyllou2000multi}. Another approach consists of Interactive Decision Maps (IDM) that are techniques that use the concept of the Edgeworth box to show the feasible set expanded by the decision vectors dominated by it \cite{lotov2013interactive}.
+    The representation of the Pareto front in optimization problems with just two objectives is quite straightforward, as seen in Figure \ref{fig:4cuad}. The Pareto front can be also represented in three dimensions with surfaces, but in high-order multi-objective optimization cases, the representation becomes harder. For those problems, there are other alternatives to the classical representation, e.g. slices of the Pareto front \cite{jaini2017fuzzy}, \cite{triantaphyllou2000multi}. Another approach consists of Interactive Decision Maps (IDM) that are techniques that use the concept of the Edgeworth box to show the feasible set expanded by the decision vectors dominated by it \cite{lotov2013interactive}.
     
     Although the optimization process has been described to minimize functions (using $-f_i$ in  case it must be maximized), with the Pareto front all possible combinations of maximization and minimization may be analyzed, as seen in Figure \ref{fig:maxmaxminmin}, where depending the optimization type used, a different zone of the function space is chosen as Pareto front \cite{deb2001multi}:
     \begin{figure}[h!]
@@ -199,7 +199,7 @@
 
     \newpage
     
-    Genetic algorithms may be mathematically formalized for simple genetic algorithms (see \cite{goldberg2006genetic} \cite{vose1991punctuated} \cite{whitley1993executable}), being able to analyze the dynamics of the system. GA are used for optimization problems, where once the optimum value is found, the state does not move from there. This kind of points are fixed points and in genetic algorithms are achieved once a population has completely converged to individuals with the same fitness. If a population does not have all individuals at the maximum fitness level, a small perturbation may move the solution from the fixed point. This situation causes \textit{punctuated equilibia} in fitness evolution: long periods of no improvement with quick rises in the fitness. Although these effects have to be rigorously quantified under different models, the implications are that a large enough number of generations must be computed to achieve a high fitness. The main assumption is that the population has an infinite size, which may lead to unexpected behaviors due to sampling errors in a genetic algorithm with a limited population size. 
+    Genetic algorithms may be mathematically formalized for simple genetic algorithms (see \cite{goldberg2006genetic}, \cite{vose1991punctuated}, \cite{whitley1993executable}), being able to analyze the dynamics of the system. GA are used for optimization problems, where once the optimum value is found, the state does not move from there. This kind of points are fixed points and in genetic algorithms are achieved once a population has completely converged to individuals with the same fitness. If a population does not have all individuals at the maximum fitness level, a small perturbation may move the solution from the fixed point. This situation causes \textit{punctuated equilibrium} in fitness evolution: long periods of no improvement with quick rises in the fitness. Although these effects have to be rigorously quantified under different models, the implications are that a large enough number of generations must be computed to achieve a high fitness. The main assumption is that the population has an infinite size, which may lead to unexpected behaviors due to sampling errors in a genetic algorithm with a limited population size. 
     
     The basic procedure of a genetic algorithm is listed below:
     \begin{algorithm}
@@ -219,7 +219,7 @@
 
     Although a genetic algorithm is procedure simple to describe and code, its behavior may be complicated and there are still many questions about how do they really work. A genetic algorithm results in complex and robust search method by implicitly sampling hyperplane partitions of a search space \cite{whitley1994genetic}.
     The genetic algorithm works by discovering and recombining good \textit{building blocks} of solutions, given that a good building block will make up a good building block.
-    Holland's book \cite{john1992holland} refers to this building blocks as \textit{schemas} that defines hyperplanes ('planes' of various dimensions). One schema on its own does not provide enough information, that is where the population-based search concept is critical, given that many hyperplanes are evaluated at the same time. The cumulative effects of evaluating a population of points will provide enough information about any particular subset of hyperplanes.
+    Holland's book \cite{john1992holland} refers to this building blocks as \textit{schemas} that defines hyperplanes. One schema on its own does not provide enough information, that is where the population-based search concept is critical, given that many hyperplanes are evaluated at the same time. The cumulative effects of evaluating a population of points will provide enough information about any particular subset of hyperplanes.
 
 \newpage
 
@@ -256,7 +256,7 @@
     Many other genetic algorithms exist and have been also tested, but only the most important and used have been listed above. There are some nomenclature that has not been introduced and it must be explained before analyzing the advantages and disadvantages of each method:
     \begin{itemize}[label={--}]
         \item \textbf{Fitness assignment}: procedure followed to assign the fitness to the individuals of each generation. It may be based on a wide range of methods of assigning.
-        \item \textbf{Diversity mechanism}: techniques used to promote the diversity of the solutions, i.e. the spread of individuals to cover the whole search and function space.
+        \item \textbf{Diversity mechanism}: techniques used to promote the diversity of the solutions, i.e., the spread of individuals to cover the whole search and function space.
         
         \newpage
         
@@ -284,14 +284,14 @@
         \item DMOEA (Decomposition-based Multi-Objective Evolutionary Algorithm): it is a method that combines some efficient techniques to update cell densities and adaptative approaches to set the genetic algorithm parameters. The main downside is its complicated implementation.
     \end{itemize}
     
-From this list of some of the most well-known genetic algorithms for multiobjective optimization, one will be chosen for the implementation and application to the CFD cases. There are some characteristics that must exist in the genetic algorithm in order to be used successfully in the cases.
+From this list of some of the most well-known genetic algorithms for multiobjective optimization, one will be chosen for the implementation and application to the CFD cases. There are some characteristics that must exist in the genetic algorithm in order to be used successfully in these cases.
 
 \newpage
 
 The desired characteristics that a GA  must have for being applied successfully to CFD cases are:
 \begin{itemize}
     \item Elitism: keeping the best individuals along generations has shown that the convergence of the solution is faster and requires less number of generations. Thus, it is very important that the algorithm chosen has elitism, given that each individual may have an evaluation time of minutes due to the CFD simulation. 
-    \item Avoid user-defined parameters: achieving the correct solution is usually directly related to the value that those parameters have, so it is interesting to choose a genetic algorithm that does not have user-defined parameters. Some of these parameters include the $k$ nearest individuals or the size of the cells when performing the fitness evaluation. 
+    \item Avoid user-defined parameters: achieving the correct solution is usually directly related to the value that those parameters have, so it is interesting to choose a genetic algorithm that does not have user-defined parameters. Some of these parameters include the $k$-nearest individuals or the size of the cells when performing the fitness evaluation. 
     \item Well-tested method: an algorithm whose performance has been tested and is above certain limit when talking about convergence to a solution is preferable with respect to a newer method that has not been tested yet. 
     \item Efficient and low resources consuming: given that the computational fluid dynamics simulations will be running for long periods of time, increasing the computational resources required for evaluating the fitness and performing the different operators is not a great way of approaching the problem.
     \item Straightforward implementation: given that the code will be implemented in Python, it is also interesting to have an algorithm whose coding may be done in a simple way and with a high level of parallelization.
@@ -299,7 +299,7 @@ The desired characteristics that a GA  must have for being applied successfully 
 Analyzing the algorithms in the table \ref{table:differentMOGA}, the one that meets all the requirements is the NSGA-II. 
 
 \subsection{Non-dominated Sorting Genetic Algorithm II)}
-The algorithm that was chosen to be implemented and used in the different computer fluid setups is the NSGA-II. This algorithm is described in \cite{deb2002fast} where the algorithm is presented as a review of the first version of the NSGA. Some characteristics that make this algorithm suitable for this study have been already mentioned. However, the potential of the algorithms lays in fitness evaluation and the way it handles the populations of parents and offspring. A combination of all these parameters is what makes this algorithm so attractive for this study. 
+The algorithm that was chosen to be implemented and used in the different computer fluid setups is the NSGA-II. This algorithm is described in \cite{deb2002fast} where the algorithm is presented as a review of the first version of the NSGA. Some characteristics that make this algorithm suitable for this study have been already mentioned. However, the potential of the algorithm lays in fitness evaluation and the way it handles the populations of parents and offspring. A combination of all these parameters is what makes this algorithm so attractive for this study. 
 
 \newpage
 The main features of the NSGA-II are:
@@ -345,7 +345,7 @@ Computer fluid dynamics is the analysis of systems involving especially fluid fl
 
 Almost all CFD codes work in the same fashion, having very differentiated steps \cite{versteeg1995computational}:
 \begin{itemize}
-    \item Pre-processor: in the step, the setup of the problem is defined: the computational domain is created with a grid or mesh formed by different cells or control volumes. The set of equations to be solved and the fluid properties are selected in this step. Also, the conditions at the boundary of the domain are established. 
+    \item Pre-processor: in this step, the setup of the problem is defined: the computational domain is created with a grid or mesh formed by different cells or control volumes. The set of equations to be solved and the fluid properties are selected in this step. Also, the conditions at the boundary of the domain are established. 
     \item Solver: there are different numerical techniques available for approaching these problems: finite difference (especially the finite volume method), finite element and spectral methods. The numerical algorithm consists on a series of steps: the integration of the governing equation of fluid flow, discretization of the resulting integral equation into an algebraic system of equations and the solution of that algebraic system of equations. 
     \item Post-processor: the output obtained in the solver phase is analyzed and data is extracted in order to draw some conclusions. With the increase of graphic capabilities of engineering workstations, a lot of versatile data visualization tools are used to present data in a more visual way. 
 \end{itemize}
