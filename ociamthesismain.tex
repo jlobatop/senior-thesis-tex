@@ -18,6 +18,9 @@
 %% QUOTATIONS MARKS
 \usepackage{dirtytalk}
 
+%% ULE COVER
+\usepackage{pdfpages}
+
 %% ITEMIZE
 \usepackage{enumitem}
 
@@ -89,8 +92,11 @@ multiobjective optimizationn}   %note \\[1ex] is a line break in the title
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
 
+% change from UVM cover to ULE cover
+%\maketitle                  % create a title page from the preamble info
+\includepdf[pages={1}]{files/ULEcover.pdf}
 
-\maketitle                  % create a title page from the preamble info
+
 \include{dedication}        % include a dedication.tex file
 \include{acknowlegements}   % include an acknowledgements.tex file
 \include{abstract}          % include the abstract
@@ -110,8 +116,8 @@ multiobjective optimizationn}   %note \\[1ex] is a line break in the title
 \include{chapter6}
 
 %%now enable appendix numbering format and include any appendices
-%\appendix
-%\include{appendix1}
+\appendix
+\include{appendix1}
 %\include{appendix2}
 
 %next line adds the Bibliography to the contents page
