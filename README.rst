@@ -17,4 +17,4 @@ The code used for this thesis is available under MIT license at: https://github.
 
 ------------------------------------------------------------
 
-The way this repository will be organized is by keeping the version handed in at the *University of Vermont* in the **master** branch, creating a slightly modified version for the *University of Leon* in other **branch**. 
+The way this repository will be organized is by keeping the version handed in at the *University of Vermont* in the **master** branch, creating a slightly modified and enhanced version for the *University of Leon* in other **branch**. 

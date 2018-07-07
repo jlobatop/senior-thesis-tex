@@ -123,7 +123,7 @@
 
 \newenvironment{dedication}
 {\begin{alwayssingle}
-  \thispagestyle{empty}
+%  \thispagestyle{empty}
   \begin{center}
   \vspace*{1.5cm}
   {\LARGE }
@@ -141,7 +141,8 @@
 % on its own page.
 
 \newenvironment{acknowledgements}
-{\begin{alwayssingle} \thispagestyle{empty}
+{\begin{alwayssingle} 
+%\thispagestyle{empty}
 \begin{center}
 \vspace*{1.5cm}
 {\Large \bfseries Acknowledgements}
@@ -155,7 +156,8 @@
 % does not appears in a quote environment so you can get more in.
 
 \newenvironment{acknowledgementslong}
-{\begin{alwayssingle} \thispagestyle{empty}
+{\begin{alwayssingle} 
+%\thispagestyle{empty}
 \begin{center}
 \vspace*{1.5cm}
 {\Large \bfseries Acknowledgements}
@@ -171,7 +173,8 @@
 % both sides, and on its own page.
 
 \newenvironment{originality}
-{\begin{alwayssingle} \thispagestyle{empty}
+{\begin{alwayssingle} 
+%\thispagestyle{empty}
 \begin{center}
 \vspace*{1.5cm}
 {\Large \bfseries Statement of Originality}
@@ -186,7 +189,8 @@
 % get more in.
 
 \newenvironment{originalitylong}
-{\begin{alwayssingle} \thispagestyle{empty}
+{\begin{alwayssingle} 
+%\thispagestyle{empty}
 \begin{center}
 \vspace*{1.5cm}
 {\Large \bfseries Statement of Originality}
@@ -201,7 +205,8 @@
 %the top of the page. The abstract itself appears in a quote environment,
 %i.e. tabbed in at both sides, and on its own page.
 
-\renewenvironment{abstract} {\begin{alwayssingle} \thispagestyle{empty}
+\renewenvironment{abstract} {\begin{alwayssingle} 
+%\thispagestyle{empty}
   \begin{center}
   \vspace*{1.5cm}
   {\Large \bfseries  Abstract}
@@ -214,7 +219,8 @@
 %the top of the page. The abstract itself does not appears in a quote
 %environment so you can get more in.
 
-\newenvironment{abstractlong} {\begin{alwayssingle} \thispagestyle{empty}
+\newenvironment{abstractlong} {\begin{alwayssingle} 
+%\thispagestyle{empty}
   \begin{center}
   \vspace*{1.5cm}
   {\Large \bfseries  Abstract}
@@ -225,7 +231,8 @@
 %The abstractseparate environment is for running of a page with the abstract
 %on including title and author etc as required to be handed in separately
 
-\newenvironment{abstractseparate} {\begin{alwayssingle} \thispagestyle{empty}
+\newenvironment{abstractseparate} {\begin{alwayssingle} 
+%\thispagestyle{empty}
   \vspace*{-1in}
  \begin{center}
     { \Large {\bfseries {\@title}} \par}
